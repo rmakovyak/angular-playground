@@ -1,17 +1,14 @@
+<h3 mat-subheader>Leagues</h3>
 <form class="example-form">
   <mat-form-field>
     <input matInput placeholder="Search" #filter (keyup)="onFilterChange(filter.value)" />
   </mat-form-field>
 </form>
-
-<mat-list>
-  <h3 mat-subheader>Leagues</h3>
-
-  <a routerLink="/teams/{{league.idLeague}}" *ngFor="let league of displayedLeagues" class="league">
-    <mat-list-item>
-      <img [src]="league.strBadge" class="league-logo" />
-      <h4 mat-line>{{league.strLeague}}</h4>
-      <p mat-line> {{league.strCountry}}</p>
-    </mat-list-item>
-  </a>
-</mat-list>
+<mat-card *ngFor="let league of displayedLeagues" class="league">
+  <img [src]="league.strBadge" class="league-logo" />
+  <div class="league-info">
+    <h4 mat-line>{{league.strLeague}}</h4>
+    <p mat-line> {{league.strCountry}}</p>
+    <a mat-raised-button color="primary" routerLink="/leagues/{{league.idLeague}}">Show league</a>
+  </div>
+</mat-card>

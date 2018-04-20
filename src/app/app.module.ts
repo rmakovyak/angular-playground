@@ -9,9 +9,10 @@ import { LeaguesComponent } from './leagues/leagues.component';
 import { TeamsComponent } from './teams/teams.component';
 import { LeaguesService } from './leagues.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LeagueComponent } from './league/league.component';
 
 @NgModule({
-  declarations: [AppComponent, LeaguesComponent, TeamsComponent],
+  declarations: [AppComponent, LeaguesComponent, TeamsComponent, LeagueComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
