@@ -10,9 +10,11 @@ import { TeamsComponent } from './teams/teams.component';
 import { LeaguesService } from './leagues.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LeagueComponent } from './league/league.component';
+import { TeamPlayersComponent } from './team-players/team-players.component';
+import { PlayersService } from './players.service';
 
 @NgModule({
-  declarations: [AppComponent, LeaguesComponent, TeamsComponent, LeagueComponent],
+  declarations: [AppComponent, LeaguesComponent, TeamsComponent, LeagueComponent, TeamPlayersComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -20,7 +22,7 @@ import { LeagueComponent } from './league/league.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [LeaguesService],
+  providers: [LeaguesService, PlayersService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
