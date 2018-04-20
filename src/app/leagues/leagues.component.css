@@ -1,0 +1,8 @@
+.league-logo {
+  width: 40px;
+}
+
+:host {
+  padding: 20px;
+  display: block;
+}

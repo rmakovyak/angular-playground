@@ -7,6 +7,8 @@ import { AppMaterialModule } from './app-material.module';
 import { AppRoutingModule } from './/app-routing.module';
 import { LeaguesComponent } from './leagues/leagues.component';
 import { TeamsComponent } from './teams/teams.component';
+import { LeaguesService } from './leagues.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, LeaguesComponent, TeamsComponent],
@@ -14,9 +16,10 @@ import { TeamsComponent } from './teams/teams.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LeaguesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
