@@ -6,10 +6,12 @@
 
 <mat-list>
   <h3 mat-subheader>Leagues</h3>
-  <mat-list-item *ngFor="let league of displayedLeagues">
-    <img [src]="league.strBadge" class="league-logo" />
-    <a mat-button routerLink="/teams/{{league.idLeague}}">Teams</a>
-    <h4 mat-line>{{league.strLeague}}</h4>
-    <p mat-line> {{league.strCountry}}</p>
-  </mat-list-item>
+
+  <a routerLink="/teams/{{league.idLeague}}" *ngFor="let league of displayedLeagues" class="league">
+    <mat-list-item>
+      <img [src]="league.strBadge" class="league-logo" />
+      <h4 mat-line>{{league.strLeague}}</h4>
+      <p mat-line> {{league.strCountry}}</p>
+    </mat-list-item>
+  </a>
 </mat-list>

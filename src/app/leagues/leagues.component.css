@@ -6,3 +6,12 @@
   padding: 20px;
   display: block;
 }
+
+.league {
+  text-decoration: none;
+  display: block;
+}
+
+.league:hover {
+  background: gainsboro;
+}
