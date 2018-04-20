@@ -5,4 +5,5 @@ export class League {
   strDescriptionEN: string;
   strBadge: string;
   strLogo: string;
+  strTrophy: string;
 }

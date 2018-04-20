@@ -6,7 +6,7 @@ import { LeagueComponent } from './league/league.component';
 const routes: Routes = [
   { path: '', redirectTo: '/leagues', pathMatch: 'full' },
   { path: 'leagues', component: LeaguesComponent },
-  { path: 'leagues/:leagueId', component: LeagueComponent }
+  { path: 'leagues/:id', component: LeagueComponent }
 ];
 
 @NgModule({
