@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppMaterialModule } from './app-material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './/app-routing.module';
 import { StateComponent } from './state/state.component';
 import { ListComponent } from './list/list.component';
@@ -15,6 +16,7 @@ import { ListComponent } from './list/list.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppMaterialModule,
+    FlexLayoutModule,
     AppRoutingModule,
     HttpClientModule
   ],

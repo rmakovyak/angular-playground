@@ -7,4 +7,4 @@ interface NodeModule {
 declare module 'typed-cloud-browser-sdk';
 import * as sdk from 'cloud-browser-sdk';
 
-sdk.method();
+// sdk.method();
