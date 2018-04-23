@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppMaterialModule } from './app-material.module';
 import { AppRoutingModule } from './/app-routing.module';
+import { StateComponent } from './state/state.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StateComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

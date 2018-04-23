@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { StateComponent } from './state/state.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/leagues', pathMatch: 'full' }
+  { path: '', redirectTo: '/state', pathMatch: 'full' },
+  { path: 'state', component: StateComponent }
 ];
 
 @NgModule({
