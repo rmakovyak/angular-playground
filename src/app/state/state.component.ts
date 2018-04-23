@@ -53,4 +53,8 @@ export class StateComponent implements OnInit {
       });
     });
   }
+
+  ngOnDestroy() {
+    this.channel.disconnect();
+  }
 }
