@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+import {
   AssetService,
   ModelService,
   DataService,
@@ -34,7 +41,7 @@ export class StateComponent implements OnInit {
         this.model = response;
 
         DataService.getLatestMeasurements(this.id).then((response) => {
-          this.measurements = assignUnit(
+          this.measurements = composeMeasurements(
             this.model.measurements,
             response.measurements
           );
@@ -45,7 +52,7 @@ export class StateComponent implements OnInit {
           this.channel = new ChannelService({
             deviceIds,
             onMeasurementPublished: (message) => {
-              this.measurements = assignUnit(
+              this.measurements = composeMeasurements(
                 this.model.measurements,
                 getNextMeasurements(this.measurements, message)
               );
@@ -66,6 +73,16 @@ export class StateComponent implements OnInit {
     this.displayedMeasurements = filter(this.measurements, this.filter);
   }
 
+  onHistoryToggle(name) {
+    this.measurements = this.measurements.map(
+      (el) => (el.name === name ? { ...el, showHistory: !el.showHistory } : el)
+    );
+
+    this.displayedMeasurements = this.displayedMeasurements.map(
+      (el) => (el.name === name ? { ...el, showHistory: !el.showHistory } : el)
+    );
+  }
+
   ngOnDestroy() {
     this.channel.disconnect();
   }
@@ -73,14 +90,21 @@ export class StateComponent implements OnInit {
 
 function getNextMeasurements(prevM, receivedM) {
   return prevM.map(
-    (el) => (el.name === receivedM.data.name ? receivedM.data : el)
+    (el) =>
+      el.name === receivedM.data.name
+        ? { ...receivedM.data, showHistory: el.showHistory }
+        : el
   );
 }
 
-function assignUnit(model, measurements) {
+function composeMeasurements(model, measurements) {
   return measurements.map((measurement) => {
     const target = model.find((el) => el.name === measurement.name);
-    return { ...measurement, ...target };
+    return {
+      ...measurement,
+      ...target,
+      showHistory: measurement.showHistory || false
+    };
   });
 }
 
