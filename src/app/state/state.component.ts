@@ -19,7 +19,9 @@ export class StateComponent implements OnInit {
   device: any;
   model: any;
   measurements: any[];
+  displayedMeasurements: any[];
   channel: any;
+  filter: string = '';
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -32,20 +34,25 @@ export class StateComponent implements OnInit {
         this.model = response;
 
         DataService.getLatestMeasurements(this.id).then((response) => {
-          this.measurements = response.measurements;
+          this.measurements = assignUnit(
+            this.model.measurements,
+            response.measurements
+          );
+          this.displayedMeasurements = filter(this.measurements, this.filter);
 
           const deviceIds = [];
           deviceIds.push(this.id);
           this.channel = new ChannelService({
             deviceIds,
             onMeasurementPublished: (message) => {
-              this.measurements = this.measurements.map((el) => {
-                if (el.name === message.data.name) {
-                  return message.data;
-                }
-
-                return el;
-              });
+              this.measurements = assignUnit(
+                this.model.measurements,
+                getNextMeasurements(this.measurements, message)
+              );
+              this.displayedMeasurements = filter(
+                this.measurements,
+                this.filter
+              );
             }
           });
           this.channel.connect();
@@ -54,7 +61,34 @@ export class StateComponent implements OnInit {
     });
   }
 
+  onSearchChange(value) {
+    this.filter = value;
+    this.displayedMeasurements = filter(this.measurements, this.filter);
+  }
+
   ngOnDestroy() {
     this.channel.disconnect();
   }
+}
+
+function getNextMeasurements(prevM, receivedM) {
+  return prevM.map(
+    (el) => (el.name === receivedM.data.name ? receivedM.data : el)
+  );
+}
+
+function assignUnit(model, measurements) {
+  return measurements.map((measurement) => {
+    const target = model.find((el) => el.name === measurement.name);
+    return { ...measurement, ...target };
+  });
+}
+
+function filter(measurements, filter) {
+  if (filter === '') {
+    return measurements;
+  }
+  return measurements.filter((el) =>
+    el.displayName.toLowerCase().includes(filter.toLowerCase())
+  );
 }
