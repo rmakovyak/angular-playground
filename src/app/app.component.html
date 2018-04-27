@@ -3,3 +3,9 @@
 </mat-toolbar>
 
 <router-outlet></router-outlet>
+
+<ul>
+    <li class="text" *ngFor="let item of items | async">
+        {{item.title}} {{item.value}}
+    </li>
+</ul>
