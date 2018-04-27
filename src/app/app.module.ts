@@ -14,9 +14,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TransactionListComponent, HomeComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

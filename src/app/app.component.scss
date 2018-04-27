@@ -1,7 +1,37 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container {
+  flex: 1;
+  background-color: #fff !important;
+}
+
 .spacer {
   flex: 1;
 }
 
 .user {
   padding-right: 20px;
+}
+
+.app-name {
+  padding-left: 20px;
+}
+
+mat-drawer {
+  width: 250px;
+  background: #fafafa;
+  padding: 20px;
+}
+
+.mat-drawer-content {
+  padding: 20px;
+}
+
+.sidebar-link {
+  width: 100%;
+  text-align: left;
 }
