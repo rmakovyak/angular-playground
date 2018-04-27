@@ -7,11 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppMaterialModule } from './app-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './/app-routing.module';
-import { StateComponent } from './state/state.component';
-import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [AppComponent, StateComponent, ListComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

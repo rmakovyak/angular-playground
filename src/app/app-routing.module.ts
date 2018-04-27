@@ -1,13 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StateComponent } from './state/state.component';
-import { ListComponent } from './list/list.component';
 
-const routes: Routes = [
-  { path: '', redirectTo: '/list', pathMatch: 'full' },
-  { path: 'list', component: ListComponent },
-  { path: 'state/:id', component: StateComponent }
-];
+const routes: Routes = [{ path: '', redirectTo: '/home', pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
