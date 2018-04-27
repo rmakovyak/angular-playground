@@ -1,3 +1,9 @@
-<p>
-  transaction-list works!
-</p>
+<mat-list>
+  <h3 mat-subheader>Transactions</h3>
+  <mat-list-item *ngFor="let t of transactions | async">
+    <mat-icon mat-list-icon>autorenew</mat-icon>
+    <h4 mat-line>{{t.value}}</h4>
+    <p mat-line> {{t.timestamp | date}} </p>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>

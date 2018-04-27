@@ -1,4 +1,11 @@
+import { Observable } from 'rxjs/Observable';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from 'angularfire2/firestore';
+
 import { Component, OnInit } from '@angular/core';
+import { Transaction } from '../transaction';
 
 @Component({
   selector: 'app-transaction-list',
@@ -6,10 +13,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction-list.component.scss']
 })
 export class TransactionListComponent implements OnInit {
+  private transactionsCollection: AngularFirestoreCollection<Transaction>;
+  transactions: Observable<Transaction[]>;
+  columnsToDisplay: ['value', 'type', 'timestamp', 'category'];
 
-  constructor() { }
+  constructor(db: AngularFirestore) {
+    const settings = { timestampsInSnapshots: true };
+    db.app.firestore().settings(settings);
+    this.transactionsCollection = db.collection<Transaction>('transactions');
 
-  ngOnInit() {
+    this.transactions = this.transactionsCollection
+      .snapshotChanges()
+      .map((actions) => {
+        return actions.map((a) => {
+          const data = a.payload.doc.data() as Transaction;
+          const id = a.payload.doc.id;
+          console.log(data);
+          return { id, ...data, timestamp: new Date(data.timestamp.seconds) };
+        });
+      });
   }
 
+  ngOnInit() {}
 }
