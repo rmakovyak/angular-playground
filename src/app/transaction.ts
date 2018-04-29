@@ -1,7 +1,7 @@
 export class Transaction {
   id: string;
   value: number;
-  timestamp: number;
+  timestamp: Date;
   type: TransactionTypes;
   category: Categories;
 }

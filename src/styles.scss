@@ -7,6 +7,20 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-body, html {
+body,
+html {
   height: 100%;
+}
+
+.page-heading {
+  display: flex;
+
+  h3 {
+    flex: 1;
+  }
+
+  .control-box {
+    flex: 1;
+    text-align: right;
+  }
 }
