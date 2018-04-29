@@ -1,23 +1,31 @@
-<div class="page-heading">
-  <h3 mat-header>Transactions</h3>
-  <div class="control-box">
-    <button mat-raised-button color="accent">New transaction</button>
+<app-page-header 
+  [title]="'Transactions'" 
+  [showActionButton]="true" 
+  [actionButtonText]="'Add transaction'"
+  (actionClick)="addTransaction($event)">
+</app-page-header>
+<div class="row" fxLayout="row" fxHide fxShow.gt-xs>
+  <div fxFlex="1 1 100%">Amount</div>
+  <div fxFlex="1 1 100%">Date</div>
+  <div fxFlex="1 1 100%">Category</div>
+</div>
+<div *ngFor="let t of transactions | async" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" [ngClass]="{'row': true, 'row-income': t.type === 'INCOME', 'row-expense': t.type === 'EXPENSE'}">
+  <div fxFlex="1 1 100%" fxLayout="row">
+    <label fxShow fxHide.gt-xs fxFlex="1 1 100%" class="row-label">Amount: </label>
+    <span fxFlex="1 1 100%">
+      <ng-container [ngSwitch]="t.type">
+        <ng-container *ngSwitchCase="'INCOME'">+</ng-container>
+        <ng-container *ngSwitchCase="'EXPENSE'">-</ng-container>
+        {{t.value | currency:'EUR'}}
+      </ng-container>
+    </span>
+  </div>
+  <div fxFlex="1 1 100%" fxLayout="row">
+    <label fxShow fxHide.gt-xs fxFlex="1 1 100%" class="row-label">Date: </label>
+    <span fxFlex="1 1 100%">{{t.timestamp | date:'short'}}</span>
+  </div>
+  <div fxFlex="1 1 100%" fxLayout="row">
+    <label fxShow fxHide.gt-xs fxFlex="1 1 100%" class="row-label">Category: </label>
+    <span fxFlex="1 1 100%">{{t.category || '-'}}</span>
   </div>
 </div>
-<mat-list>
-  <mat-list-item class="row">
-    <span class="column">Amount</span>
-    <span class="column">Date</span>
-    <span class="column">Category</span>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item *ngFor="let t of transactions | async" [ngClass]="{'row': true, 'row-income': t.type === 'INCOME', 'row-expense': t.type === 'EXPENSE'}">
-    <ng-container [ngSwitch]="t.type">
-      <span *ngSwitchCase="'INCOME'" class="column">+ {{t.value | currency:'EUR'}}</span>
-      <span *ngSwitchCase="'EXPENSE'" class="column">- {{t.value | currency:'EUR'}}</span>
-    </ng-container>
-    <span class="column"> {{t.timestamp | date:'short'}} </span>
-    <span class="column"> {{t.category || '-'}} </span>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>

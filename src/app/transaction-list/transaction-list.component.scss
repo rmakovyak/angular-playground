@@ -7,10 +7,11 @@
 }
 
 .row {
-  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid gainsboro;
   font-size: 14px;
+}
 
-  .column {
-    flex: 1;
-  }
+.row-label {
+  font-weight: bold;
 }

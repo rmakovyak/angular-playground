@@ -39,5 +39,9 @@ export class TransactionListComponent implements OnInit {
       });
   }
 
+  addTransaction(e) {
+    console.log(e);
+  }
+
   ngOnInit() {}
 }

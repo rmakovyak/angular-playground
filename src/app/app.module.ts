@@ -16,9 +16,10 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { HomeComponent } from './home/home.component';
+import { PageHeaderComponent } from './page-header/page-header.component';
 
 @NgModule({
-  declarations: [AppComponent, TransactionListComponent, HomeComponent],
+  declarations: [AppComponent, TransactionListComponent, HomeComponent, PageHeaderComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

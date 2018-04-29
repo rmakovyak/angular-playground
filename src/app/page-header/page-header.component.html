@@ -1,0 +1,6 @@
+<div fxLayout="row">
+  <h3 mat-header fxFlex="1 1 100%">{{title}}</h3>
+  <div fxFlex="1 1 100%" style="text-align: right;" *ngIf="showActionButton">
+    <button mat-raised-button color="accent" (click)="actionWasClicked(title)">{{actionButtonText}}</button>
+  </div>
+</div>
