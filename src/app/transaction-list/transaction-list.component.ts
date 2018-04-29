@@ -43,5 +43,15 @@ export class TransactionListComponent implements OnInit {
     console.log(e);
   }
 
+  onFromChange(from) {
+    console.log(from);
+    // need RxJS for this
+  }
+
+  onToChange(to) {
+    console.log(to);
+    // need RxJS for this
+  }
+
   ngOnInit() {}
 }
