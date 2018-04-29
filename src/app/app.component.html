@@ -1,20 +1,15 @@
-<mat-toolbar color="primary" class="mat-elevation-z8">
+<mat-toolbar color="primary" class="mat-elevation-z1">
     <button mat-icon-button>
         <mat-icon (click)="drawer.toggle()">view_headline</mat-icon>
     </button>
     <span class="app-name">BudgetTracker v0.1</span>
     <span class="spacer"></span>
-    <ng-container *ngIf="afAuth.authState | async as user; else showLogin">
+    <ng-container *ngIf="afAuth.authState | async as user">
         <mat-icon class="example-icon">verified_user</mat-icon>
         <div class="user">{{ user.displayName }}</div>
         <button mat-button (click)="logout()">Logout</button>
     </ng-container>
 </mat-toolbar>
-
-<ng-template #showLogin>
-    <div class="user">Please login</div>
-    <button (click)="login()" mat-button>Login with Google</button>
-</ng-template>
 
 <mat-drawer-container class="container" autosize>
     <mat-drawer #drawer mode="side" opened="true">
@@ -22,6 +17,9 @@
         <a mat-button routerLink="/transactions" class="sidebar-link">Transactions</a>
     </mat-drawer>
     <mat-drawer-content>
-        <router-outlet></router-outlet>
+        <router-outlet *ngIf="afAuth.authState | async as user; else showLogin"></router-outlet>
+        <ng-template #showLogin>
+            <button (click)="login()" mat-raised-button color="primary">Login with Google</button>
+        </ng-template>
     </mat-drawer-content>
 </mat-drawer-container>
