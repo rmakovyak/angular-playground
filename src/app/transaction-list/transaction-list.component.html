@@ -5,19 +5,19 @@
   </div>
 </div>
 <mat-list>
-  <mat-list-item class="tr">
-    <span>Amount</span>
-    <span>Date</span>
-    <span>Category</span>
+  <mat-list-item class="row">
+    <span class="column">Amount</span>
+    <span class="column">Date</span>
+    <span class="column">Category</span>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item *ngFor="let t of transactions | async" class="tr">
+  <mat-list-item *ngFor="let t of transactions | async" [ngClass]="{'row': true, 'row-income': t.type === 'INCOME', 'row-expense': t.type === 'EXPENSE'}">
     <ng-container [ngSwitch]="t.type">
-      <span *ngSwitchCase="'INCOME'">+ {{t.value | currency:'EUR'}}</span>
-      <span *ngSwitchCase="'EXPENSE'">- {{t.value | currency:'EUR'}}</span>
+      <span *ngSwitchCase="'INCOME'" class="column">+ {{t.value | currency:'EUR'}}</span>
+      <span *ngSwitchCase="'EXPENSE'" class="column">- {{t.value | currency:'EUR'}}</span>
     </ng-container>
-    <span> {{t.timestamp | date:'short'}} </span>
-    <span> {{t.category}} </span>
+    <span class="column"> {{t.timestamp | date:'short'}} </span>
+    <span class="column"> {{t.category || '-'}} </span>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>

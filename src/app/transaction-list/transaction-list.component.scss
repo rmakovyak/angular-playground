@@ -1,15 +1,16 @@
-.income {
-  color: #009688;
+.row-income {
+  background: #e8f5e9;
 }
 
-.expense {
-  color: #f44336;
+.row-expense {
+  background: #ffebee;
 }
 
-.tr {
+.row {
   display: flex;
+  font-size: 14px;
 
-  span {
+  .column {
     flex: 1;
   }
 }
