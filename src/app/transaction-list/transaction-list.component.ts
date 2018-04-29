@@ -15,9 +15,6 @@ import { Transaction } from '../transaction';
 export class TransactionListComponent implements OnInit {
   private transactionsCollection: AngularFirestoreCollection<Transaction>;
   transactions: Observable<Transaction[]>;
-  columnsToDisplay: ['value', 'type', 'timestamp', 'category'];
-  income: 'INCOME';
-  expense: 'EXPENSE';
 
   constructor(db: AngularFirestore) {
     const settings = { timestampsInSnapshots: true };
