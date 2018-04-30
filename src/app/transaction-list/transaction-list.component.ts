@@ -15,9 +15,6 @@ import { Transaction } from '../transaction';
 export class TransactionListComponent implements OnInit {
   private transactionsCollection: AngularFirestoreCollection<Transaction>;
   transactions: Observable<Transaction[]>;
-  columnsToDisplay: ['value', 'type', 'timestamp', 'category'];
-  income: 'INCOME';
-  expense: 'EXPENSE';
 
   constructor(db: AngularFirestore) {
     const settings = { timestampsInSnapshots: true };
@@ -26,9 +23,9 @@ export class TransactionListComponent implements OnInit {
 
     this.transactions = this.transactionsCollection
       .snapshotChanges()
-      .map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Transaction;
+      .map((actions) => {
+        return actions.map((a) => {
+          const data = a.payload.doc.data() as any;
           const id = a.payload.doc.id;
           return {
             id,
