@@ -1,21 +1,11 @@
 <app-page-header [title]="'Transactions'" [showActionButton]="true" [actionButtonText]="'Add transaction'" (actionClick)="addTransaction($event)">
 </app-page-header>
-<mat-form-field>
-  <input matInput [matDatepicker]="from" placeholder="From">
-  <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
-  <mat-datepicker #from (selectedChanged)="filterByDate($event, 'from')"></mat-datepicker>
-</mat-form-field>
-<mat-form-field>
-  <input matInput [matDatepicker]="to" placeholder="To">
-  <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
-  <mat-datepicker #to (selectedChanged)="filterByDate($event, 'to')"></mat-datepicker>
-</mat-form-field>
 <div class="row" fxLayout="row" fxHide fxShow.gt-xs>
   <div fxFlex="1 1 100%">Amount</div>
   <div fxFlex="1 1 100%">Date</div>
   <div fxFlex="1 1 100%">Category</div>
 </div>
-<div *ngFor="let t of transactions | async" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" [ngClass]="{'row': true, 'row-income': t.type === 'INCOME', 'row-expense': t.type === 'EXPENSE'}">
+<div *ngFor="let t of transactions" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start stretch" [ngClass]="{'row': true, 'row-income': t.type === 'INCOME', 'row-expense': t.type === 'EXPENSE'}">
   <div fxFlex="1 1 100%" fxLayout="row">
     <label fxShow fxHide.gt-xs fxFlex="1 1 100%" class="row-label">Amount: </label>
     <span fxFlex="1 1 100%">
@@ -28,7 +18,7 @@
   </div>
   <div fxFlex="1 1 100%" fxLayout="row">
     <label fxShow fxHide.gt-xs fxFlex="1 1 100%" class="row-label">Date: </label>
-    <span fxFlex="1 1 100%">{{t.timestamp | date:'short'}}</span>
+    <span fxFlex="1 1 100%">{{t.date | date:'short'}}</span>
   </div>
   <div fxFlex="1 1 100%" fxLayout="row">
     <label fxShow fxHide.gt-xs fxFlex="1 1 100%" class="row-label">Category: </label>

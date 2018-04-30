@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { HomeComponent } from './home/home.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
+import { TransactionService } from './transaction.service';
 
 @NgModule({
   declarations: [AppComponent, TransactionListComponent, HomeComponent, PageHeaderComponent],
@@ -32,7 +33,7 @@ import { PageHeaderComponent } from './page-header/page-header.component';
     FlexLayoutModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
