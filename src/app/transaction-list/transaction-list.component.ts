@@ -17,4 +17,8 @@ export class TransactionListComponent implements OnInit {
       .getTransactions()
       .subscribe((response) => (this.transactions = response));
   }
+
+  addTransaction(e) {
+    console.log(e);
+  }
 }
