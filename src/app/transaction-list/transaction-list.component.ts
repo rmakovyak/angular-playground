@@ -9,7 +9,6 @@ import { TransactionService } from '../transaction.service';
 })
 export class TransactionListComponent implements OnInit {
   transactions: Transaction[];
-  createTransaction: boolean;
 
   constructor(public transactionService: TransactionService) {}
 
@@ -17,9 +16,5 @@ export class TransactionListComponent implements OnInit {
     this.transactionService
       .getTransactions()
       .subscribe(response => (this.transactions = response));
-  }
-
-  addTransaction(e) {
-    console.log(e);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../transaction.service';
-import { Transaction } from '../transaction';
+import { Transaction, Categories, TransactionTypes } from '../transaction';
 
 @Component({
   selector: 'app-create-transaction',
@@ -24,16 +24,24 @@ export class CreateTransactionComponent implements OnInit {
     'OTHER'
   ];
   types = ['INCOME', 'EXPENSE'];
-  amount;
-  category;
-  date;
-  type;
+  amount: any;
+  category: Categories;
+  date = new Date();
+  type: any;
   constructor(public transactionService: TransactionService) {}
 
   ngOnInit() {}
 
   createTransaction(e) {
     e.preventDefault();
-    this.transactionService.create(new Transaction());
+
+    if (!this.amount.invalid || !this.type.invalid) {
+      this.transactionService.create({
+        amount: this.amount,
+        category: this.category,
+        type: this.type,
+        date: new Date(this.date)
+      });
+    }
   }
 }

@@ -17,20 +17,14 @@ export class TransactionService {
   }
 
   getTransactions() {
-    return this.transactionsCollection.snapshotChanges().map(transactions =>
-      transactions.map(a => {
-        const data = a.payload.doc.data() as any;
-        const id = a.payload.doc.id;
-        return {
-          id,
-          ...data,
-          date: new Date(data.timestamp.seconds * 1000)
-        };
-      })
-    );
+    return this.transactionsCollection
+      .snapshotChanges()
+      .map(transactions =>
+        transactions.map(a => a.payload.doc.data() as Transaction)
+      );
   }
 
   create(transaction: Transaction) {
-    // this.transactionsCollection.add(JSON.parse(JSON.stringify(transaction)));
+    this.transactionsCollection.add(JSON.parse(JSON.stringify(transaction)));
   }
 }

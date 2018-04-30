@@ -1,25 +1,27 @@
-<form>
-  <mat-form-field>
-    <input matInput placeholder="Amount" type="number" [(ngModel)]="amount" name='amount' />
+<form fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+  <mat-form-field fxFlex="1 1 100%">
+    <input required matInput placeholder="Amount" type="number" [(ngModel)]="amount" name='amount' />
   </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Type" [(ngModel)]="type" name="type">
+  <mat-form-field fxFlex="1 1 100%">
+    <mat-select placeholder="Type" [(ngModel)]="type" name="type" required>
       <mat-option *ngFor="let type of types" [value]="type">
         {{ type }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field fxFlex="1 1 100%">
     <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date" name="date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field fxFlex="1 1 100%">
     <mat-select placeholder="Category" [(ngModel)]="category" name="category">
       <mat-option *ngFor="let category of categories" [value]="category">
         {{ category }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="createTransaction($event)">Add</button>
+  <div fxLayout fxLayoutAlign="center center">
+    <button mat-raised-button color="accent" (click)="createTransaction($event)">Add</button>
+  </div>
 </form>

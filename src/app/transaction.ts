@@ -1,6 +1,5 @@
 export class Transaction {
-  id: string;
-  value: number;
+  amount: number;
   date: Date;
   type: TransactionTypes;
   category: Categories;
