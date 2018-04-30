@@ -1,4 +1,4 @@
-<app-page-header [title]="'Transactions'" [showActionButton]="true" [actionButtonText]="'Add transaction'" (actionClick)="addTransaction($event)">
+<app-page-header [title]="'Transactions'" [showActionButton]="true" [actionButtonText]="'Add transaction'" (actionClick)="createTransaction = true">
 </app-page-header>
 <mat-table [dataSource]="transactions">
   <ng-container matColumnDef="amount">
@@ -22,3 +22,4 @@
   <mat-header-row *matHeaderRowDef="['amount', 'date', 'category']"></mat-header-row>
   <mat-row *matRowDef="let myRowData; columns: ['amount', 'date', 'category']"></mat-row>
 </mat-table>
+<app-create-transaction *ngIf="createTransaction"></app-create-transaction>

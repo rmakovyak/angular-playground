@@ -18,9 +18,17 @@ import { TransactionListComponent } from './transaction-list/transaction-list.co
 import { HomeComponent } from './home/home.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { TransactionService } from './transaction.service';
+import { CreateTransactionComponent } from './create-transaction/create-transaction.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, TransactionListComponent, HomeComponent, PageHeaderComponent],
+  declarations: [
+    AppComponent,
+    TransactionListComponent,
+    HomeComponent,
+    PageHeaderComponent,
+    CreateTransactionComponent
+  ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -31,7 +39,8 @@ import { TransactionService } from './transaction.service';
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [TransactionService],
   bootstrap: [AppComponent]

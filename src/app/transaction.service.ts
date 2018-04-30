@@ -17,8 +17,8 @@ export class TransactionService {
   }
 
   getTransactions() {
-    return this.transactionsCollection.snapshotChanges().map((transactions) =>
-      transactions.map((a) => {
+    return this.transactionsCollection.snapshotChanges().map(transactions =>
+      transactions.map(a => {
         const data = a.payload.doc.data() as any;
         const id = a.payload.doc.id;
         return {
@@ -28,5 +28,9 @@ export class TransactionService {
         };
       })
     );
+  }
+
+  create(transaction: Transaction) {
+    // this.transactionsCollection.add(JSON.parse(JSON.stringify(transaction)));
   }
 }

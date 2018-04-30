@@ -9,13 +9,14 @@ import { TransactionService } from '../transaction.service';
 })
 export class TransactionListComponent implements OnInit {
   transactions: Transaction[];
+  createTransaction: boolean;
 
   constructor(public transactionService: TransactionService) {}
 
   ngOnInit() {
     this.transactionService
       .getTransactions()
-      .subscribe((response) => (this.transactions = response));
+      .subscribe(response => (this.transactions = response));
   }
 
   addTransaction(e) {

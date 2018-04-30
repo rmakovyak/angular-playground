@@ -1,0 +1,25 @@
+<form>
+  <mat-form-field>
+    <input matInput placeholder="Amount" type="number" [(ngModel)]="amount" name='amount' />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Type" [(ngModel)]="type" name="type">
+      <mat-option *ngFor="let type of types" [value]="type">
+        {{ type }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date" name="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Category" [(ngModel)]="category" name="category">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="createTransaction($event)">Add</button>
+</form>

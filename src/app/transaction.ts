@@ -6,12 +6,12 @@ export class Transaction {
   category: Categories;
 }
 
-enum TransactionTypes {
+export enum TransactionTypes {
   Income = 'INCOME',
   Expense = 'EXPENSE'
 }
 
-enum Categories {
+export enum Categories {
   Rent = 'RENT',
   Internet = 'INTERNET',
   Radio = 'RADIO',
