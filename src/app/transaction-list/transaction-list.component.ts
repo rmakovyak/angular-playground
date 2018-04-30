@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+import { filter } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreCollection
@@ -15,6 +16,9 @@ import { Transaction } from '../transaction';
 export class TransactionListComponent implements OnInit {
   private transactionsCollection: AngularFirestoreCollection<Transaction>;
   transactions: Observable<Transaction[]>;
+  displayedTransactions: Observable<Transaction[]>;
+  from: number = 0;
+  to: number = new Date('01/01/2050').getTime();
 
   constructor(db: AngularFirestore) {
     const settings = { timestampsInSnapshots: true };
@@ -23,31 +27,45 @@ export class TransactionListComponent implements OnInit {
 
     this.transactions = this.transactionsCollection
       .snapshotChanges()
-      .map((actions) => {
-        return actions.map((a) => {
-          const data = a.payload.doc.data() as any;
-          const id = a.payload.doc.id;
-          return {
-            id,
-            ...data,
-            timestamp: new Date(data.timestamp.seconds * 1000)
-          };
-        });
+      .map((transactions) => {
+        return this.transformTransactions(transactions);
       });
+  }
+
+  transformTransactions(transactions) {
+    return transactions.map((a) => {
+      const data = a.payload.doc.data() as any;
+      const id = a.payload.doc.id;
+      return {
+        id,
+        ...data,
+        timestamp: new Date(data.timestamp.seconds * 1000)
+      };
+    });
   }
 
   addTransaction(e) {
     console.log(e);
   }
 
-  onFromChange(from) {
-    console.log(from);
-    // need RxJS for this
-  }
+  filterByDate(date: string, period: string) {
+    const time = new Date(date).getTime();
 
-  onToChange(to) {
-    console.log(to);
-    // need RxJS for this
+    if (period === 'from') {
+      this.from = time;
+    } else {
+      this.to = time;
+    }
+
+    this.transactions = this.transactionsCollection
+      .snapshotChanges()
+      .map((transactions) => {
+        return this.transformTransactions(transactions).filter(
+          (el) =>
+            new Date(el.timestamp).getTime() >= this.from &&
+            new Date(el.timestamp).getTime() <= this.to
+        );
+      });
   }
 
   ngOnInit() {}

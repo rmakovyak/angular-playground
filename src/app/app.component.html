@@ -2,7 +2,7 @@
     <button mat-icon-button>
         <mat-icon (click)="drawer.toggle()">view_headline</mat-icon>
     </button>
-    <span class="app-name" fxHide fxShow.gt-xs>BudgetTracker v0.1</span>
+    <!-- <span class="app-name" fxHide fxShow.gt-xs>BudgetTracker v0.1</span> -->
     <span class="spacer"></span>
     <ng-container *ngIf="afAuth.authState | async as user">
         <mat-icon class="example-icon">verified_user</mat-icon>
