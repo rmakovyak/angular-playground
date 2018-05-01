@@ -18,7 +18,7 @@
   </ng-container>
   <ng-container matColumnDef="category">
     <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
-    <mat-cell *matCellDef="let t"> {{t.category || '-'}} </mat-cell>
+    <mat-cell *matCellDef="let t"> {{t.category.value || '-'}} </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="['amount', 'date', 'category']"></mat-header-row>
   <mat-row *matRowDef="let myRowData; columns: ['amount', 'date', 'category']"></mat-row>

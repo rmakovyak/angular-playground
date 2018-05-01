@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../transaction.service';
-import { Transaction, Categories, TransactionTypes } from '../transaction';
+import { Transaction, TransactionTypes } from '../transaction';
+import { CategoryService } from '../category.service';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-create-transaction',
@@ -8,39 +10,35 @@ import { Transaction, Categories, TransactionTypes } from '../transaction';
   styleUrls: ['./create-transaction.component.scss']
 })
 export class CreateTransactionComponent implements OnInit {
-  categories = [
-    'RENT',
-    'INTERNET',
-    'RADIO',
-    'ELECTRICITY',
-    'SUBSCRIPTIONS',
-    'GROCERIES',
-    'DROGERIE',
-    'PUBLIC_TRANSPORTATION',
-    'BEAUTY',
-    'LUNCH',
-    'EATING_OUT',
-    'FUN',
-    'OTHER'
-  ];
+  categories: Category[];
   types = ['INCOME', 'EXPENSE'];
-  amount: any;
-  category: Categories;
-  date = new Date();
-  type: any;
-  constructor(public transactionService: TransactionService) {}
 
-  ngOnInit() {}
+  amountModel: any;
+  typeModel: any;
+  categoryModel: Category;
+  dateModel = new Date();
+
+  constructor(
+    public transactionService: TransactionService,
+    public categoryService: CategoryService
+  ) {}
+
+  ngOnInit() {
+    this.categoryService.getCategories().subscribe(response => {
+      this.categories = response;
+      console.log(this.categories);
+    });
+  }
 
   createTransaction(e) {
     e.preventDefault();
 
-    if (!this.amount.invalid || !this.type.invalid) {
+    if (!this.amountModel.invalid || !this.typeModel.invalid) {
       this.transactionService.create({
-        amount: this.amount,
-        category: this.category,
-        type: this.type,
-        date: new Date(this.date)
+        amount: this.amountModel,
+        category: this.categoryModel || { id: '', value: '' },
+        type: this.typeModel,
+        date: new Date(this.dateModel)
       });
     }
   }

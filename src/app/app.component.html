@@ -15,6 +15,7 @@
     <mat-drawer #drawer mode="over">
         <a mat-button routerLink="/" class="sidebar-link" (click)="drawer.toggle()">Home</a>
         <a mat-button routerLink="/transactions" class="sidebar-link" (click)="drawer.toggle()">Transactions</a>
+        <a mat-button routerLink="/categories" class="sidebar-link" (click)="drawer.toggle()">Categorires</a>
     </mat-drawer>
     <mat-drawer-content>
         <router-outlet *ngIf="afAuth.authState | async as user; else showLogin"></router-outlet>

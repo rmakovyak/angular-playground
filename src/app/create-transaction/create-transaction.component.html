@@ -1,23 +1,23 @@
 <form fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
   <mat-form-field fxFlex="1 1 100%">
-    <input required matInput placeholder="Amount" type="number" [(ngModel)]="amount" name='amount' />
+    <input required matInput placeholder="Amount" type="number" [(ngModel)]="amountModel" name='amount' />
   </mat-form-field>
   <mat-form-field fxFlex="1 1 100%">
-    <mat-select placeholder="Type" [(ngModel)]="type" name="type" required>
+    <mat-select placeholder="Type" [(ngModel)]="typeModel" name="type" required>
       <mat-option *ngFor="let type of types" [value]="type">
         {{ type }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field fxFlex="1 1 100%">
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date" name="date">
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="dateModel" name="date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field fxFlex="1 1 100%">
-    <mat-select placeholder="Category" [(ngModel)]="category" name="category">
+    <mat-select placeholder="Category" [(ngModel)]="categoryModel" name="category">
       <mat-option *ngFor="let category of categories" [value]="category">
-        {{ category }}
+        {{ category.value }}
       </mat-option>
     </mat-select>
   </mat-form-field>

@@ -20,6 +20,8 @@ import { PageHeaderComponent } from './page-header/page-header.component';
 import { TransactionService } from './transaction.service';
 import { CreateTransactionComponent } from './create-transaction/create-transaction.component';
 import { FormsModule } from '@angular/forms';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryService } from './category.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     TransactionListComponent,
     HomeComponent,
     PageHeaderComponent,
-    CreateTransactionComponent
+    CreateTransactionComponent,
+    CategoriesComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -42,7 +45,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [TransactionService],
+  providers: [TransactionService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

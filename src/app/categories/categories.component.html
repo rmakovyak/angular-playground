@@ -1,0 +1,27 @@
+<app-page-header [title]="'Categories'"></app-page-header>
+<form>
+  <mat-form-field>
+    <input required matInput placeholder="Category name" [(ngModel)]="categoryModel" name='amount' />
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="createCategory($event)" style="margin-left: 20px;">Add</button>
+</form>
+<mat-table [dataSource]="categories">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let c">{{c.id}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="value">
+    <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+    <mat-cell *matCellDef="let c"> {{c.value}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+    <mat-cell *matCellDef="let c">
+      <button mat-icon-button (click)="categoryService.delete(c.docId)" color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['id', 'value', 'action']"></mat-header-row>
+  <mat-row *matRowDef="let myRowData; columns: ['id', 'value', 'action']"></mat-row>
+</mat-table>
