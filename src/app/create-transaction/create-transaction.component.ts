@@ -24,9 +24,8 @@ export class CreateTransactionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.categoryService.getCategories().subscribe(response => {
+    this.categoryService.getCategories().subscribe((response) => {
       this.categories = response;
-      console.log(this.categories);
     });
   }
 
