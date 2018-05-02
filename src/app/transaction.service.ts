@@ -10,21 +10,28 @@ import 'rxjs/add/operator/map';
 export class TransactionService {
   private transactionsCollection: AngularFirestoreCollection<Transaction>;
 
-  constructor(db: AngularFirestore) {
+  constructor(public db: AngularFirestore) {
     const settings = { timestampsInSnapshots: true };
     db.app.firestore().settings(settings);
     this.transactionsCollection = db.collection<Transaction>('transactions');
   }
 
   getTransactions() {
-    return this.transactionsCollection
-      .snapshotChanges()
-      .map(transactions =>
-        transactions.map(a => a.payload.doc.data() as Transaction)
-      );
+    return this.transactionsCollection.snapshotChanges().map((transactions) =>
+      transactions.map((a) => {
+        const data = a.payload.doc.data() as Transaction;
+        const docId = a.payload.doc.id;
+        return { docId, ...data };
+      })
+    );
   }
 
   create(transaction: Transaction) {
     this.transactionsCollection.add(JSON.parse(JSON.stringify(transaction)));
+  }
+
+  delete(docId: string) {
+    const transactionDoc = this.db.doc<Transaction>(`transactions/${docId}`);
+    transactionDoc.delete();
   }
 }

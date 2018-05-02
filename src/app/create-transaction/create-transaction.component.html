@@ -15,7 +15,7 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field fxFlex="1 1 100%">
-    <mat-select placeholder="Category" [(ngModel)]="categoryModel" name="category">
+    <mat-select placeholder="Category" [(ngModel)]="categoryModel" name="category" [disabled]="typeModel != 'EXPENSE'">
       <mat-option *ngFor="let category of categories" [value]="category">
         {{ category.value }}
       </mat-option>

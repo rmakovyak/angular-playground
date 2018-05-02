@@ -20,6 +20,14 @@
     <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
     <mat-cell *matCellDef="let t"> {{t.category.value || '-'}} </mat-cell>
   </ng-container>
-  <mat-header-row *matHeaderRowDef="['amount', 'date', 'category']"></mat-header-row>
-  <mat-row *matRowDef="let myRowData; columns: ['amount', 'date', 'category']"></mat-row>
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+    <mat-cell *matCellDef="let c">
+      <button mat-icon-button (click)="transactionService.delete(c.docId)" color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['amount', 'date', 'category', 'action']"></mat-header-row>
+  <mat-row *matRowDef="let myRowData; columns: ['amount', 'date', 'category', 'action']"></mat-row>
 </mat-table>
